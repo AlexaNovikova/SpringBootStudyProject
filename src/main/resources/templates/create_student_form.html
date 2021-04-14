@@ -12,15 +12,25 @@
 <body>
 <div class="container">
     <h1>Добавить нового студента</h1>
-    <!-- http://localhost:8189/app/students/create?id=10&name=Nicolas&score=90 -->
-    <form method="POST" th:action="@{/students/create}">
-        <input type="number" name="id">
-        <input type="text" name="name">
-        <input type="number" name="score">
+    <form method="POST" th:action="@{/create}">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">ID</span>
+        <input type="number" name="id" class="form-control" placeholder="ID" aria-label="ID" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon2">Name</span>
+        <input type="text" name="name" class="form-control" placeholder="Student's name" aria-label="Student's name" aria-describedby="basic-addon2">
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">Score</span>
+        <input type="number" name="score" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+    </div>
         <button type="submit">Создать</button>
     </form>
-    <a th:href="@{/}">На главную страницу</a>
-    <!-- http://localhost:8189/app/students/create?id=10&name=Nicolas&score=90 -->
+    <br>
+    <a class="btn btn-outline-primary" th:href="@{/}">На главную страницу</a>
 </div>
 </body>
 </html>

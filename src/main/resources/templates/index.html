@@ -26,12 +26,23 @@
         <tr th:each="s : ${students}">
             <td th:text="${s.id}"/>
             <td th:text="${s.name}"/>
-            <td th:text="${s.score}"/>
-            <td><a class="btn btn-danger" th:href="@{'/students/delete/' + ${s.id}}">Удалить запись</a></td>
+            <td>
+                <a class="btn btn-light" th:href="@{'/decScore/'+${s.id}}">-</a>
+                <b th:text="${s.score}"/>
+                <a class="btn btn-light" th:href="@{'/incScore/'+${s.id}}">+</a>
+            </td>
+            <td><a class="btn btn-danger" th:href="@{'/delete/' + ${s.id}}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/create}">Добавить нового студента</a>
+ <br>
+    <h3>Найти студента по Id </h3>
+    <form method="POST" th:action="@{/search}">
+        <input type="number" name="id">
+        <button class="btn btn-outline-primary" type="submit">Найти</button>
+    </form>
+<br>
+    <a class="btn btn-outline-primary" th:href="@{/create}">Добавить нового студента</a>
 </div>
 </body>
 </html>

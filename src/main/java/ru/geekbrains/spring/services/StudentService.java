@@ -38,4 +38,11 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
+    public void incScore(Long id) {
+        studentRepository.incScore(id);
+    }
+
+    public void decScore(Long id) {
+        studentRepository.decScore(id);
+    }
 }
