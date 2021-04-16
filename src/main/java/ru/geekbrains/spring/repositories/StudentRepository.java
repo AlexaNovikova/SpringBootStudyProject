@@ -44,4 +44,13 @@ public class StudentRepository {
         students.removeIf(s -> s.getId().equals(id));
     }
 
+    public void incScore(Long id) {
+        Optional<Student> student = findOneById(id);
+        student.ifPresent(Student::incScore);
+    }
+
+    public void decScore(Long id) {
+        Optional<Student> student = findOneById(id);
+        student.ifPresent(Student::decScore);
+    }
 }

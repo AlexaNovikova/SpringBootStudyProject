@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.spring.models.Student;
 import ru.geekbrains.spring.services.StudentService;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +19,10 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    // [http://localhost:8189/app]/students/all
+    // [http://localhost:8189/app]/
     @GetMapping("/")
     public String showAllStudentsPage(Model model) {
+        model.addAttribute("groupName", "SSA-98");
         List<Student> students = studentService.findAll();
         model.addAttribute("students", students);
         return "index";
@@ -38,7 +38,6 @@ public class StudentController {
     }
 
 
-    // [http://localhost:8189/app]/students/creator
     @GetMapping("/create")
     public String showCreator() {
         return "create_student_form";
@@ -64,5 +63,25 @@ public class StudentController {
         studentService.deleteById(id);
         return "redirect:/";
   }
+
+    @PostMapping("/search")
+    public String searchStudent(@RequestParam Long id, Model model) {
+       return showStudentInfo(id, model);
+    }
+
+    @GetMapping("/incScore/{id}")
+    public String incScore(@PathVariable Long id)
+    {
+        studentService.incScore(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/decScore/{id}")
+    public String decScore(@PathVariable Long id)
+    {
+        studentService.decScore(id);
+        return "redirect:/";
+    }
+
 }
 
