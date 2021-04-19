@@ -11,7 +11,7 @@
 
 <body>
 <div class="container">
-    <h1>Добавить нового студента</h1>
+    <h1>Добавить новый продукт</h1>
     <form method="POST" th:action="@{/create}">
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">ID</span>
@@ -20,12 +20,12 @@
 
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon2">Name</span>
-        <input type="text" name="name" class="form-control" placeholder="Student's name" aria-label="Student's name" aria-describedby="basic-addon2">
+        <input type="text" name="name" class="form-control" placeholder="Product name" aria-label="Product name" aria-describedby="basic-addon2">
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">Score</span>
-        <input type="number" name="score" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+        <span class="input-group-text" id="basic-addon3">Price</span>
+        <input type="number" name="price" class="form-control" id="basic-url" aria-describedby="basic-addon3">
     </div>
         <button type="submit">Создать</button>
     </form>
