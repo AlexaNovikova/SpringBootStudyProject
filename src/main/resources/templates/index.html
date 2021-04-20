@@ -11,27 +11,37 @@
 
 <body>
 <div class="container">
-    <h1>Ведомость</h1>
-    <h5 th:text="${'Студенты группы: ' + groupName}"></h5>
+    <h1>Список продуктов</h1>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Имя</th>
-            <th>Балл</th>
+            <th>Наименование</th>
+            <th>Цена</th>
             <th>Действие</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${students}">
+        <tr th:each="s : ${products}">
             <td th:text="${s.id}"/>
             <td th:text="${s.name}"/>
-            <td th:text="${s.score}"/>
-            <td><a class="btn btn-danger" th:href="@{'/students/delete/' + ${s.id}}">Удалить запись</a></td>
+            <td>
+                <a class="btn btn-light" th:href="@{'/decPrice/'+${s.id}}">-</a>
+                <b th:text="${s.price}"/>
+                <a class="btn btn-light" th:href="@{'/incPrice/'+${s.id}}">+</a>
+            </td>
+            <td><a class="btn btn-danger" th:href="@{'/delete/' + ${s.id}}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/create}">Добавить нового студента</a>
+ <br>
+    <h3>Найти продукт по Id </h3>
+    <form method="POST" th:action="@{/search}">
+        <input type="number" name="id">
+        <button class="btn btn-outline-primary" type="submit">Найти</button>
+    </form>
+<br>
+    <a class="btn btn-outline-primary" th:href="@{/create}">Добавить новый продукт</a>
 </div>
 </body>
 </html>
