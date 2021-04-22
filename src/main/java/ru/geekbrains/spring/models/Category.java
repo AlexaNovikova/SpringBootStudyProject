@@ -29,6 +29,10 @@ public class Category {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Product> products;
 
+    public Category(String name) {
+        this.name = name;
+        products=null;
+    }
 
     @Override
     public String toString() {

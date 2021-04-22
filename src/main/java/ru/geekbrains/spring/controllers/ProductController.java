@@ -59,9 +59,8 @@ public class ProductController {
 
 
         @PostMapping("/create")
-       public String createNewProduct(@ModelAttribute Product product) {
-        product.setCategory(new Category());
-        productService.save(product);
+       public String createNewProduct(@ModelAttribute Product product, @RequestParam String category_name) {
+        productService.save(product, category_name);
         return "redirect:/";
     }
 

@@ -25,7 +25,9 @@
         <tbody>
         <tr th:each="p : ${products}">
             <td th:text="${p.id}"/>
+            <div th:if="${p.category.name != null}">
             <td th:text="${p.category.name}"/>
+            </div>
             <td th:text="${p.name}"/>
             <td>
                 <b th:text="${p.price}"/>

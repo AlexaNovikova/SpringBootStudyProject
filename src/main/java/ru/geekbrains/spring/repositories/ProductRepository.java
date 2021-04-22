@@ -34,9 +34,20 @@ public class ProductRepository {
     }
     }
 
-    public void save(Product product) {
+    public void save(Product product, String category_name) {
         try(Session session = hibernateUtils.getCurrentSession()){
             session.beginTransaction();
+            List<Category> categories = session.createQuery("from Category").getResultList();
+            for (Category c: categories) {
+                if (c.getName().equals(category_name)){
+                   product.setCategory(c);
+                }
+            }
+           if(product.getCategory()==null){
+                Category newCategory = new Category( category_name);
+                session.saveOrUpdate(newCategory);
+                product.setCategory(newCategory);
+            }
             session.saveOrUpdate(product);
             session.getTransaction().commit();
         }
@@ -74,5 +85,16 @@ public class ProductRepository {
             }
            return null;
         }
+    }
+
+    public Category findCategory(Long category_id) {
+       try(Session session = hibernateUtils.getCurrentSession()){
+           session.beginTransaction();
+           Optional<Category> category = Optional.ofNullable(session.get(Category.class, category_id));
+           if (category.isPresent()){
+               return category.get();
+           }
+           return null;
+       }
     }
 }

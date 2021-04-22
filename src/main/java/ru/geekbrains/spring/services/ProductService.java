@@ -2,6 +2,7 @@ package ru.geekbrains.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.geekbrains.spring.models.Category;
 import ru.geekbrains.spring.models.Product;
 import ru.geekbrains.spring.repositories.ProductRepository;
 
@@ -27,8 +28,8 @@ public class ProductService {
         return productRepository.findOneById(id);
     }
 
-    public void save(Product product) {
-        productRepository.save(product);
+    public void save(Product product, String category_name) {
+        productRepository.save(product, category_name);
     }
 
     public void deleteById(Long id){
@@ -38,5 +39,9 @@ public class ProductService {
 
     public List<Product> findProductsByCategory(Long id) {
        return productRepository.findProductsById(id);
+    }
+
+    public Category findCategory(Long category_id) {
+        return  productRepository.findCategory(category_id);
     }
 }

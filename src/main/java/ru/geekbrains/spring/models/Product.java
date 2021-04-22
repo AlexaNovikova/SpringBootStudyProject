@@ -16,7 +16,6 @@ import javax.persistence.*;
 
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="id")
@@ -29,7 +28,7 @@ public class Product {
     private  int price;
 
     @ManyToOne
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "category_id")
     private Category category;
 
@@ -39,6 +38,7 @@ public class Product {
        }
        else throw new IllegalArgumentException("Цена не может быть отрицательным числом.");
     }
+
 
     public Category getCategory() {
         return category;
