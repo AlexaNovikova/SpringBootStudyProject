@@ -10,7 +10,9 @@
 </head>
 
 <body>
+
 <div class="container">
+    <div th:if="${products != null}">
     <h1>Каталог</h1>
     <table class="table table-hover">
         <thead>
@@ -25,9 +27,7 @@
         <tbody>
         <tr th:each="p : ${products}">
             <td th:text="${p.id}"/>
-            <div th:if="${p.category.name != null}">
             <td th:text="${p.category.name}"/>
-            </div>
             <td th:text="${p.name}"/>
             <td>
                 <b th:text="${p.price}"/>
@@ -36,14 +36,11 @@
         </tr>
         </tbody>
     </table>
- <br>
-    <h3>Найти продукт по Id </h3>
-    <form method="POST" th:action="@{/search}">
-        <input type="number" name="id">
-        <button class="btn btn-outline-primary" type="submit">Найти</button>
-    </form>
-<br>
-    <a class="btn btn-outline-primary" th:href="@{/create}">Добавить новый продукт</a>
+    </div>
+    <div th:if ="${products == null}">
+        <h5>Такой категории не существует. Проверьте ID</h5>
+    </div>
+    <a class="btn btn-outline-primary" th:href="@{/}">На главную страницу</a>
 </div>
 </body>
 </html>
