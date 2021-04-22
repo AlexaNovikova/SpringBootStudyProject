@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.spring.models.Category;
 import ru.geekbrains.spring.models.Product;
 import ru.geekbrains.spring.services.ProductService;
 
@@ -27,6 +28,20 @@ public class ProductController {
         return "index";
     }
 
+//    @GetMapping("/find/{category_id}")
+//    public String showProductsByCategory( @PathVariable(name = "category_id") Long id, Model model) {
+//        List<Product> products = productService.findProductsByCategory(id);
+//        model.addAttribute("products", products);
+//        return "productsByCategory";
+//    }
+
+    @GetMapping("/find")
+    public String showProductsByCategory( @RequestParam Long id, Model model) {
+        List<Product> products = productService.findProductsByCategory(id);
+        model.addAttribute("products", products);
+        return "productsByCategory";
+    }
+
     @GetMapping("/{id}")
     public String showProductInfo(@PathVariable(name = "id") Long id, Model model) {
         Optional<Product> product = productService.findOneById(id);
@@ -42,16 +57,10 @@ public class ProductController {
         return "create_product_form";
     }
 
-    // [http://localhost:8189/app]/students/create?id=10&name=Nicolas&score=95
-//    @PostMapping("/create")
-//    public String createNewStudent(@RequestParam Long id, @RequestParam String name, @RequestParam int score) {
-//        Student student = new Student(id, name, score);
-//        studentService.save(student);
-//        return "redirect:/students/all";
-//    }
 
         @PostMapping("/create")
        public String createNewProduct(@ModelAttribute Product product) {
+        product.setCategory(new Category());
         productService.save(product);
         return "redirect:/";
     }
@@ -68,18 +77,5 @@ public class ProductController {
        return showProductInfo(id, model);
     }
 
-    @GetMapping("/incPrice/{id}")
-    public String incScore(@PathVariable Long id)
-    {
-        productService.incPrice(id);
-        return "redirect:/";
-    }
-
-    @GetMapping("/decPrice/{id}")
-    public String decScore(@PathVariable Long id)
-    {
-        productService.decPrice(id);
-        return "redirect:/";
-    }
 }
 

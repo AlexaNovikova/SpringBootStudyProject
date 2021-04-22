@@ -27,19 +27,16 @@ public class ProductService {
         return productRepository.findOneById(id);
     }
 
-    public void save(Product student) {
-        productRepository.save(student);
+    public void save(Product product) {
+        productRepository.save(product);
     }
 
     public void deleteById(Long id){
         productRepository.deleteById(id);
     }
 
-    public void incPrice(Long id) {
-        productRepository.incPrice(id);
-    }
 
-    public void decPrice(Long id) {
-        productRepository.decPrice(id);
+    public List<Product> findProductsByCategory(Long id) {
+       return productRepository.findProductsById(id);
     }
 }
