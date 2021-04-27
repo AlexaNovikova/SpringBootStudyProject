@@ -11,27 +11,78 @@
 
 <body>
 <div class="container">
-    <h1>Ведомость</h1>
-    <h5 th:text="${'Студенты группы: ' + groupName}"></h5>
+    <h1>Каталог</h1>
+    <br>
+    <h3>Фильтр</h3>
+    <form method="GET" th:action="@{/}">
+
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <label class="form-label">Minimum Price</label>
+                <input type="number" name="minPrice" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Maximum Price</label>
+                <input type="number" name="maxPrice" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                   <label class="form-label">Title</label>
+                    <input type="text" name = "partOfName" class="form-control">
+                </div>
+
+            <div class="col-md-3" >
+                <label class="form-label"></label>
+            <button class="btn btn-outline-primary form-control" type="submit" >Применить</button>
+            </div>
+        </div>
+
+    </form>
+    <br>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Имя</th>
-            <th>Балл</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th>Категория</th>
             <th>Действие</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="s : ${students}">
-            <td th:text="${s.id}"/>
-            <td th:text="${s.name}"/>
-            <td th:text="${s.score}"/>
-            <td><a class="btn btn-danger" th:href="@{'/students/delete/' + ${s.id}}">Удалить запись</a></td>
+        <tr th:each="p : ${page.getContent()}">
+            <td th:text="${p.id}"/>
+            <td>
+
+                <a th:text="${p.name}" th:href="@{'/'+${p.id}}"></a>
+            </td>
+            <td>
+                <span th:text="${p.price}"/>
+                <a class="btn btn-primary" th:href="@{'/products/' + ${p.id} + '/incPrice'}">+</a>
+            </td>
+            <td th:text="${p.category.name}"/>
+            <td><a class="btn btn-danger" th:href="@{'/delete/' + ${p.id}}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/create}">Добавить нового студента</a>
+    <nav aria-label="Page navigation" th:if="${page.getTotalPages()>1}">
+        <ul class="pagination">
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                <a th:class="page-link" th:text="${i}" th:href ="@{'/?p=' +${i}}"></a>
+            </li>
+        </ul>
+    </nav>
+ <br>
+    <h3>Найти продукт по Id </h3>
+    <form method="POST" th:action="@{/search}">
+        <input type="number" name="id">
+        <button class="btn btn-outline-primary" type="submit">Найти</button>
+    </form>
+<br>
+    <a class="btn btn-outline-primary" th:href="@{/create}">Добавить новый продукт</a>
 </div>
 </body>
 </html>
