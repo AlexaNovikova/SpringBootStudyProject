@@ -12,30 +12,69 @@
 <body>
 <div class="container">
     <h1>Каталог</h1>
+    <br>
+    <h3>Фильтр</h3>
+    <form method="GET" th:action="@{/}">
+
+
+        <div class="row g-4">
+            <div class="col-md-3">
+                <label class="form-label">Minimum Price</label>
+                <input type="number" name="minPrice" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Maximum Price</label>
+                <input type="number" name="maxPrice" class="form-control">
+            </div>
+
+            <div class="col-md-3">
+                   <label class="form-label">Title</label>
+                    <input type="text" name = "partOfName" class="form-control">
+                </div>
+
+            <div class="col-md-3" >
+                <label class="form-label"></label>
+            <button class="btn btn-outline-primary form-control" type="submit" >Применить</button>
+            </div>
+        </div>
+
+    </form>
+    <br>
     <table class="table table-hover">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Категория</th>
             <th>Наименование</th>
             <th>Цена</th>
+            <th>Категория</th>
             <th>Действие</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="p : ${products}">
+        <tr th:each="p : ${page.getContent()}">
             <td th:text="${p.id}"/>
-            <div th:if="${p.category.name != null}">
-            <td th:text="${p.category.name}"/>
-            </div>
-            <td th:text="${p.name}"/>
             <td>
-                <b th:text="${p.price}"/>
+
+                <a th:text="${p.name}" th:href="@{'/'+${p.id}}"></a>
             </td>
+            <td>
+                <span th:text="${p.price}"/>
+                <a class="btn btn-primary" th:href="@{'/products/' + ${p.id} + '/incPrice'}">+</a>
+            </td>
+            <td th:text="${p.category.name}"/>
             <td><a class="btn btn-danger" th:href="@{'/delete/' + ${p.id}}">Удалить</a></td>
         </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation" th:if="${page.getTotalPages()>1}">
+        <ul class="pagination">
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(1, page.getTotalPages())}">
+                <a th:class="page-link" th:text="${i}" th:href ="@{'/?p=' +${i}}"></a>
+            </li>
+        </ul>
+    </nav>
  <br>
     <h3>Найти продукт по Id </h3>
     <form method="POST" th:action="@{/search}">

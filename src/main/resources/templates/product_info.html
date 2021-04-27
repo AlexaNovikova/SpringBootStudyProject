@@ -14,6 +14,7 @@
     <h1>Информация о продукте</h1>
     <div th:if="${product != null}">
         <h5 th:text="${'ID: ' + product.id}"/>
+        <h5 th:text="${'Категория: ' + product.category.name}"/>
         <h5 th:text="${'Имя: ' + product.name}"/>
         <h5 th:text="${'Цена: ' + product.price}"/>
     </div>

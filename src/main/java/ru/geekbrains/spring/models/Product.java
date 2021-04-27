@@ -39,9 +39,12 @@ public class Product {
        else throw new IllegalArgumentException("Цена не может быть отрицательным числом.");
     }
 
-
     public Category getCategory() {
         return category;
+    }
+
+    public void incrementPrice(int amount){
+        price+=amount;
     }
 
 }
