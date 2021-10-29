@@ -35,7 +35,6 @@ public class ProductController {
                     "%"+partOfName+"%");
             model.addAttribute("page", page);
             return "index";
-
     }
 
 //    @GetMapping("/find/{category_id}")
