@@ -12,15 +12,13 @@
 <body>
 <div class="container">
     <h1>Добавить нового студента</h1>
-    <!-- http://localhost:8189/app/students/create?id=10&name=Nicolas&score=90 -->
     <form method="POST" th:action="@{/students/create}">
         <input type="number" name="id">
         <input type="text" name="name">
-        <input type="number" name="score">
+        <input type="number" name="age">
         <button type="submit">Создать</button>
     </form>
     <a th:href="@{/}">На главную страницу</a>
-    <!-- http://localhost:8189/app/students/create?id=10&name=Nicolas&score=90 -->
 </div>
 </body>
 </html>

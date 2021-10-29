@@ -16,10 +16,10 @@ public class StudentRepository {
     @PostConstruct
     public void Init() {
         students = new ArrayList<>(Arrays.asList(
-                new Student(1L, "John", 80),
-                new Student(2L, "Jack", 90),
-                new Student(3L, "Bob", 100),
-                new Student(4L, "Max", 90)
+                new Student(1L, "John", 19),
+                new Student(2L, "Jack", 18),
+                new Student(3L, "Bob", 20),
+                new Student(4L, "Max", 18)
         ));
     }
 

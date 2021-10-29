@@ -31,9 +31,7 @@ public class StudentController {
     @GetMapping("/{id}")
     public String showStudentInfo(@PathVariable(name = "id") Long id, Model model) {
         Optional<Student> student = studentService.findOneById(id);
-        if (student.isPresent()) {
-            model.addAttribute("student", student.get());
-        }
+        student.ifPresent(value -> model.addAttribute("student", value));
         return "student_info";
     }
 

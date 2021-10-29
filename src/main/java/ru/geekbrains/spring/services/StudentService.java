@@ -31,9 +31,6 @@ public class StudentService {
         studentRepository.save(student);
     }
 
-    public double getAverageScore() {
-        return studentRepository.findAll().stream().mapToInt(Student::getScore).average().getAsDouble();
-    }
     public void deleteById(Long id){
         studentRepository.deleteById(id);
     }

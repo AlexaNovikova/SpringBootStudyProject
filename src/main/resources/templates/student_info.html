@@ -15,7 +15,7 @@
     <div th:if="${student != null}">
         <h5 th:text="${'ID: ' + student.id}"/>
         <h5 th:text="${'Имя: ' + student.name}"/>
-        <h5 th:text="${'Балл: ' + student.score}"/>
+        <h5 th:text="${'Балл: ' + student.age}"/>
     </div>
     <div th:if="${student == null}">
         <h5>Такого студента не существует. Проверьте ID</h5>
